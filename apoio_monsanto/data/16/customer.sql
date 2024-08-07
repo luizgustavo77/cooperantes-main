@@ -1,0 +1,30 @@
+USE [base_monsanto]
+GO
+
+/****** Object:  Table [dbo].[CUSTOMER]    Script Date: 01/09/2015 00:13:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[CUSTOMER](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](255) NOT NULL,
+	[document] [varchar](255) NOT NULL,
+	[type] [int] NULL,
+	[del] [varchar](1) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+

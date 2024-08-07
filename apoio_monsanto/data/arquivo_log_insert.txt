@@ -1,0 +1,11 @@
+ UPDATE [base_monsanto].[dbo].[CONTRACT] 
+                          SET dt_receb =  CONVERT(DATETIME, NULLIF('22/04/2020',''),105), 
+                              safra = '2019/2020', obs = '', status = '1', 
+                              dt_status = CONVERT(DATETIME,NULLIF('22/04/2020',''),105), user_conf = 'APOIO GLA', 
+                              criteria = '', id_user_rtv = '', id_user_gr = '', 
+                                dt_digital = CONVERT(DATETIME, NULLIF('22/04/2020',''),105), dt_archive = CONVERT(DATETIME, NULLIF('22/04/2020',''),105), 
+                                dt_approv = CONVERT(DATETIME, NULLIF('22/04/2020',''), 105), keeper = '966977643', lastupduser = 'apoio.gla', type_doc_prdsem = '5', 
+                                term = 'ta', dt_contrato = '06/09/2019', vigencia = '', rs_vol_total = '', rs_vol_testada_mais = '',
+                                rs_vol_testada_menos = '', baixa_credito = '', fixacao = '', rs_valor_fixado = '', rs_vol_outros_partic = '',
+                                valor_taxas = '', bonus_semestral = '', reajuste = '', rs_valor_adiantamento = '',
+                                area_produtor_hectare = '', valor_hectare = '' WHERE id = 12157

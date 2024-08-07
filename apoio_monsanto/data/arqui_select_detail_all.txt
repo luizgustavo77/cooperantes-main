@@ -1,0 +1,45 @@
+ SELECT distinct client.name as 'Nome do Cliente', 
+              client.document as 'Documento do Cliente', 
+               safra as 'Safra', c.id as 'ID', 
+               case when type_contract = 1 then 'Distribuidor' 
+             when type_contract = 2 then 'POD' 
+             when type_contract = 3 then 'Produtor de Sementes' 
+             when type_contract = 4 then 'Monsoy' 
+             when type_contract = 5 then 'Comissões' 
+             when type_contract = 6 then 'Groud Breakers' 
+             when type_contract = 7 then 'Distribuidor Algodão' 
+             WHEN type_contract = 8 then 'Multiplicador Algodão' 
+             else 'Outro Tipo' end as 'TipoContrato', 
+                substring(CAST(dt_receb as varchar),9,2) + '/' +  substring(CAST(dt_receb as varchar),6,2) + '/' + substring(CAST(dt_receb as varchar),1,4) as 'Data de Recebimento', 
+                case when status = 1 then 'Aprovado' else 'Reprovado' end as 'Status', 
+               id_user_rtv as 'RTV', 
+                id_user_gr as 'GR', 
+               substring(CAST(dt_digital as varchar),9,2) + '/' +  substring(CAST(dt_digital as varchar),6,2) + '/' + substring(CAST(dt_digital as varchar),1,4) as 'Data de Digitalização', 
+                substring(CAST(dt_approv as varchar),9,2) + '/' +  substring(CAST(dt_approv as varchar),6,2) + '/' + substring(CAST(dt_approv as varchar),1,4) as 'Data de Aprovação', 
+               substring(CAST(dt_archive as varchar),9,2) + '/' +  substring(CAST(dt_archive as varchar),6,2) + '/' + substring(CAST(dt_archive as varchar),1,4) as 'Data Keepers', 
+               keeper as 'N. Caixa Keepers', case when term = 'at' then 'Aditivo ao Termo' when term = 'ta' then 'Termo de Aditivo'  when term = 'tx' then 'Termo Aditivo - Taxa de Serviço' else '' end as 'Tipo de Termo',
+case when c.type_doc_prdsem = '1' then 'Contrato de Licenciamento de Tecnologia Intacta RR2 PRO' 
+               when c.type_doc_prdsem = '2' then 'Contrato de Prestação de Serviços e outras avenças' 
+               when c.type_doc_prdsem = '3' then 'Termo de Licenciamento' 
+               when c.type_doc_prdsem = '4' then 'Procuração' 
+               when c.type_doc_prdsem = '5' then 'Contrato de Licenciamento de Tecnologia Bollgard II e RRFlex' 
+               else '' end TipoProdutorSementes,               
+c.dt_contrato as 'Data Contrato',
+               c.vigencia as 'Vigencia',
+               c.rs_vol_total as 'R$/Vol Total',
+               c.rs_vol_testada_mais as 'R$/Vol Testada +',
+               c.rs_vol_testada_menos as 'R$/Vol Testada -',
+               c.baixa_credito as 'Baixa de Crédito',
+               c.fixacao as 'Fixacao',
+               c.rs_valor_fixado as 'R$ Valor Fixado',
+               c.rs_vol_outros_partic as 'R$ Vol Outros Partic',
+               c.valor_taxas as 'Valor das Taxas',
+               c.bonus_semestral as 'Bônus Semestral',
+               c.reajuste as 'Reajuste',
+               c.rs_valor_adiantamento as 'R$ Valor Adiantamento'
+             FROM [base_monsanto].[dbo].[CONTRACT]c 
+             LEFT JOIN base_monsanto.dbo.register AS gr on gr.name = id_user_gr AND gr.type = 4 
+             LEFT JOIN base_monsanto.dbo.register AS rtv on rtv.name = id_user_rtv AND rtv.type = 3
+             LEFT JOIN base_monsanto.dbo.customer AS client on client.ID = id_client
+              WHERE (dt_receb IS NOT NULL AND dt_receb <> '') 
+             AND status in (1,2)   ORDER BY 1
