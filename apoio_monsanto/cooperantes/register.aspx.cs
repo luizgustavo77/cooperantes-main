@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Canducci.Zip;
+using System;
 using System.Data;
-using Canducci.Zip;
-
+using System.Web.UI;
 
 namespace apoio_monsanto.cooperantes
 {
@@ -15,6 +10,7 @@ namespace apoio_monsanto.cooperantes
         coopcom com = new coopcom();
         mon mon = new mon();
         ZipCodeLoad zipLoad = new ZipCodeLoad();
+
         string visualiza = "";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -77,12 +73,12 @@ namespace apoio_monsanto.cooperantes
                             ZipCode zipCode = null;
                             if (ZipCode.TryParse(dsPesq.Tables[0].Rows[0]["cep"].ToString(), out zipCode))
                             {
-                                ZipCodeInfo zipCodeInfo = zipLoad.Find(zipCode);
+                                var zipCodeInfo = zipLoad.FindAsync(zipCode).GetAwaiter().GetResult();
 
-                                txRua.Text = zipCodeInfo.Address;
-                                txBairro.Text = zipCodeInfo.District;
-                                txCidade.Text = zipCodeInfo.City;
-                                txEstado.Text = zipCodeInfo.Uf;
+                                txRua.Text = zipCodeInfo.Value.Address;
+                                txBairro.Text = zipCodeInfo.Value.District;
+                                txCidade.Text = zipCodeInfo.Value.City;
+                                txEstado.Text = zipCodeInfo.Value.Uf;
                             }
                             else
                             {
@@ -182,12 +178,12 @@ namespace apoio_monsanto.cooperantes
             ZipCode zipCode = null;
             if (ZipCode.TryParse(txCep.Text, out zipCode))
             {
-                ZipCodeInfo zipCodeInfo = zipLoad.Find(zipCode);
+                var zipCodeInfo = zipLoad.FindAsync(zipCode).GetAwaiter().GetResult();
 
-                txRua.Text = zipCodeInfo.Address;
-                txBairro.Text = zipCodeInfo.District;
-                txCidade.Text = zipCodeInfo.City;
-                txEstado.Text = zipCodeInfo.Uf;
+                txRua.Text = zipCodeInfo.Value.Address;
+                txBairro.Text = zipCodeInfo.Value.District;
+                txCidade.Text = zipCodeInfo.Value.City;
+                txEstado.Text = zipCodeInfo.Value.Uf;
             }
 
         }
@@ -251,11 +247,11 @@ namespace apoio_monsanto.cooperantes
 
                 returnInitialState();
             }
-                
+
             else
                 ret = "Todos os campos são obrigatórios!";
 
-            
+
             error.InnerText = ret;
 
         }
@@ -274,7 +270,7 @@ namespace apoio_monsanto.cooperantes
             }
             else
                 ret = "Todos os campos são obrigatórios!";
-           
+
             error.InnerText = ret;
 
         }

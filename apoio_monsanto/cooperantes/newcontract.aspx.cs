@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data;
-using System.Collections;
-using System.Web.SessionState;
-using System.Web.UI.HtmlControls;
 using System.IO;
-using Util;
-using System.Diagnostics;
+using System.Web.UI;
 
 namespace apoio_monsanto.cooperantes
 {
     public partial class newcontract : System.Web.UI.Page
     {
         coopcom com = new coopcom();
-        Funcoes func = new Funcoes();
+        //Funcoes func = new Funcoes();
         protected System.Web.UI.HtmlControls.HtmlInputFile File;
         protected System.Web.UI.HtmlControls.HtmlInputButton Submit;
         string visualiza = "";

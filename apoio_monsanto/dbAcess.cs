@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Util;
 using System.Security.Cryptography;
 using System.Text;
-using System.Configuration;
 
 namespace apoio_monsanto
 {
     public class dbAcess
     {
-        Util.Funcoes func = new Funcoes();
+        //Util.Funcoes func = new Funcoes();
         //string connStr = ConfigurationManager.ConnectionStrings["MyDbConn1"].ToString();
         //SqlConnection myConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog = base_monsanto; Integrated Security = False; User Id = apoio_mon; Password=&$$mon_$@nt0;");
 
-        SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDbConn2"].ToString());
+        SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDbConn1"].ToString());
         private DataSet dsRetQry = new DataSet();
         public DataSet dsReturn
         {
@@ -44,7 +40,7 @@ namespace apoio_monsanto
             }
         }
 
-        public bool OpenCon ()
+        public bool OpenCon()
         {
             try
             {
@@ -58,7 +54,7 @@ namespace apoio_monsanto
             return true;
         }
 
-        public bool CloseCon ()
+        public bool CloseCon()
         {
             try
             {
@@ -71,7 +67,7 @@ namespace apoio_monsanto
             return true;
         }
 
-        public void stringSql (string query)
+        public void stringSql(string query)
         {
             using (var cmd = myConnection.CreateCommand())
             {
@@ -86,7 +82,7 @@ namespace apoio_monsanto
 
                     retQry = "";
                 }
-               
+
             }
 
             try
@@ -106,7 +102,7 @@ namespace apoio_monsanto
             {
                 OpenCon();
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 retQry = "Erro ao abrir conexão: " + e.Message;
                 return false;
@@ -114,7 +110,7 @@ namespace apoio_monsanto
 
             SqlDataAdapter dadapter = new SqlDataAdapter();
 
-            if (type=="insert")
+            if (type == "insert")
             {
                 try
                 {
@@ -141,7 +137,7 @@ namespace apoio_monsanto
                     return false;
                 }
             }
-            else if (type=="delete")
+            else if (type == "delete")
             {
                 try
                 {
@@ -168,7 +164,7 @@ namespace apoio_monsanto
                     return false;
                 }
             }
-            else if (type=="update")
+            else if (type == "update")
             {
                 try
                 {
@@ -198,7 +194,7 @@ namespace apoio_monsanto
             }
             else
             {
-                
+
                 try
                 {
                     dsReturn.Clear();
@@ -210,7 +206,7 @@ namespace apoio_monsanto
                     retQry = "Erro ao executar dataset: " + d.Message;
                     return false;
                 }
-                
+
             }
 
             try

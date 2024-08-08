@@ -47,8 +47,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Canducci.Zip">
-      <HintPath>..\..\Sistema Financeiro\sisbase\apoio_monsanto\bin\Canducci.Zip.dll</HintPath>
+    <Reference Include="Canducci.Zip, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Canducci.Zip.2.0.1\lib\net45\Canducci.Zip.dll</HintPath>
     </Reference>
     <Reference Include="DotNet.Highcharts">
       <HintPath>..\..\DotNet.Highcharts.4.0\DotNet.Highcharts.dll</HintPath>

@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using DotNet.Highcharts;
-using System.Web.Script.Serialization;
 using System.Data;
-using System.Collections;
 using System.IO;
-using System.Drawing;
-using System.Configuration;
+using System.Web.Script.Serialization;
+using System.Web.UI;
 
 namespace apoio_monsanto
 {
@@ -19,12 +11,12 @@ namespace apoio_monsanto
         commom com = new commom();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
                 ddSafra.DataBind();
                 ddSafra.SelectedValue = "";
             }
-                
+
             // categorias de acordo com a safra
             String catType = catGraph(ddSafra.SelectedValue);
 
@@ -73,12 +65,12 @@ namespace apoio_monsanto
         }
         protected void btPes_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         public String catGraph(string safra)
         {
-            if(!string.IsNullOrEmpty(safra))
+            if (!string.IsNullOrEmpty(safra))
             {
                 string[] splitedSafra = safra.Split('/');
                 if (splitedSafra[0] == splitedSafra[1])
@@ -97,10 +89,10 @@ namespace apoio_monsanto
                 acategorie = new string[] { "Setembro", "Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto" };
                 return "Sem Safra Definida";
             }
-            
+
         }
 
-        public void retDataGraph (DataSet data, String catType, ref int[] iVal)
+        public void retDataGraph(DataSet data, String catType, ref int[] iVal)
         {
             int[] auxVal = new int[12];
             for (int i = 0; i <= 11; i++)
