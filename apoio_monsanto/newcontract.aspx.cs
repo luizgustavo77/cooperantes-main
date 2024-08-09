@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Collections;
-using System.Web.SessionState;
-using System.Web.UI.HtmlControls;
-using System.IO;
 
 namespace apoio_monsanto
 {
@@ -26,12 +21,12 @@ namespace apoio_monsanto
                 string userGr = "";
                 string userRTV = "";
 
-                if (! Page.IsPostBack)
+                if (!Page.IsPostBack)
                 {
                     if (dsPesq != null)
                     {
                         txName.InnerText = dsPesq.Tables[0].Rows[0][1].ToString();
-                        txDoc.InnerText = dsPesq.Tables[0].Rows[0][2].ToString();                      
+                        txDoc.InnerText = dsPesq.Tables[0].Rows[0][2].ToString();
 
                         try
                         {
@@ -47,7 +42,7 @@ namespace apoio_monsanto
                                     error.Visible = true;
                                     error.InnerText = " GR não encontrado para o cliente. Ele pode ter sido removido ou não foi cadastrado!";
                                 }
-                                
+
                             }
                         }
                         catch (System.IndexOutOfRangeException gr)
@@ -108,7 +103,7 @@ namespace apoio_monsanto
                     com.deleteDoc(Request.QueryString["id_del"].ToString());
                     bool directoryExists = Directory.Exists(saveLocation);
                     //if (directoryExists)
-                        //Directory.Delete(saveLocation, true);
+                    //Directory.Delete(saveLocation, true);
                 }
 
                 if (Request.QueryString["id_contract"] != null && Request.QueryString["type"] != null)
@@ -131,11 +126,11 @@ namespace apoio_monsanto
                         {
 
                             ddRTV.Enabled = true;
-                            if( ! string.IsNullOrEmpty(dsCont.Tables[0].Rows[0]["id_user_rtv"].ToString()))
+                            if (!string.IsNullOrEmpty(dsCont.Tables[0].Rows[0]["id_user_rtv"].ToString()))
                                 ddRTV.SelectedValue = dsCont.Tables[0].Rows[0]["id_user_rtv"].ToString();
 
                             ddGR.Enabled = true;
-                            if( ! string.IsNullOrEmpty(dsCont.Tables[0].Rows[0]["id_user_gr"].ToString()))
+                            if (!string.IsNullOrEmpty(dsCont.Tables[0].Rows[0]["id_user_gr"].ToString()))
                                 ddGR.SelectedValue = dsCont.Tables[0].Rows[0]["id_user_gr"].ToString();
 
                             txDtRec.Text = dsCont.Tables[0].Rows[0]["dt_receb"].ToString();
@@ -144,7 +139,7 @@ namespace apoio_monsanto
                             txDtRec.ReadOnly = readOnly;
 
                             string safra = dsCont.Tables[0].Rows[0]["safra"].ToString();
-                            if(!string.IsNullOrEmpty(safra))
+                            if (!string.IsNullOrEmpty(safra))
                                 ddSafra.SelectedValue = safra;
 
                             txObsCon.Text = dsCont.Tables[0].Rows[0]["obs"].ToString();
@@ -261,7 +256,7 @@ namespace apoio_monsanto
                 if (rbTpProd.SelectedValue == "" && Request.QueryString["type"] != null)
                 {
                     if (Request.QueryString["type"].ToString() == "3")
-                    { 
+                    {
                         error.Visible = true;
                         error.InnerText = "Para o tipo de contrato informado, é necessário selecionar um tipo de documento!";
                         rbTpProd.Focus();
@@ -330,7 +325,7 @@ namespace apoio_monsanto
                        txDtDigit.Text, txArqui.Text, txAprov.Text,
                        txCKeepers.Text, Session["login"].ToString(), tpProd, rbTpTermo.SelectedValue,
                        txDtContrato.Text, txVigencia.Text, txRsVolTotal.Text, txRsVolTestadaMais.Text, txRsVolTestadaMenos.Text,
-                       txBxCredito.Text, txFixacao.Text, txRsValorFixado.Text, txRsValorOutrosPartic.Text, txValorTaxas.Text, txBonusSemestral.Text, 
+                       txBxCredito.Text, txFixacao.Text, txRsValorFixado.Text, txRsValorOutrosPartic.Text, txValorTaxas.Text, txBonusSemestral.Text,
                        txReajuste.Text, txValorAdiantamento.Text, area_produtor_hectares.Text, valor_hectare.Text);
 
 
@@ -405,7 +400,7 @@ namespace apoio_monsanto
                                 error.Visible = true;
                                 error.InnerText = "Erro ao enviar dados (UPD): " + ex.Message;
                             }
-                           
+
                         }
                     }
 
@@ -462,14 +457,14 @@ namespace apoio_monsanto
                     archiveName = txUp.PostedFile.FileName;
                 }
 
-                if ( rbTpTermo.SelectedValue != "" )
+                if (rbTpTermo.SelectedValue != "")
                 {
-                    if(tpProd)
+                    if (tpProd)
                         archiveName = rbTpProd.SelectedItem.Text + " - " + rbTpTermo.SelectedItem.Text;
                     else
                         archiveName = rbTpTermo.SelectedItem.Text;
                 }
-                
+
                 string path = Server.MapPath("Data");
                 string saveLocation = path + "\\" + Request.QueryString["id_contract"].ToString();
 
@@ -518,7 +513,7 @@ namespace apoio_monsanto
                     error.InnerText = "Todos os campos são obrigatórios quando o contrato está aprovado.";
                     return false;
                 }
-                    
+
             }
 
             return true;

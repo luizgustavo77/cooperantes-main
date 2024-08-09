@@ -78,6 +78,15 @@ namespace apoio_monsanto.glaapoio
         protected global::System.Web.UI.WebControls.TextBox data_recebimento;
 
         /// <summary>
+        /// rfvDtRec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDtRec;
+
+        /// <summary>
         /// data_arquivamento control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace apoio_monsanto.glaapoio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox caixa;
+
+        /// <summary>
+        /// rfvCaixa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCaixa;
 
         /// <summary>
         /// data_contrato control.
@@ -141,13 +159,22 @@ namespace apoio_monsanto.glaapoio
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoAcordo;
 
         /// <summary>
-        /// txObsCon control.
+        /// lstLeft control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txObsCon;
+        protected global::System.Web.UI.WebControls.ListBox lstLeft;
+
+        /// <summary>
+        /// lstRight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lstRight;
 
         /// <summary>
         /// divUp control.
@@ -238,5 +265,14 @@ namespace apoio_monsanto.glaapoio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource obSafra;
+
+        /// <summary>
+        /// obMotivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource obMotivo;
     }
 }

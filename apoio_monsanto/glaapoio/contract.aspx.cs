@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
+using System.Web.UI;
 
 namespace apoio_monsanto.glaapoio
 {
@@ -16,7 +12,7 @@ namespace apoio_monsanto.glaapoio
         protected void Page_Load(object sender, EventArgs e)
         {
             error.InnerText = "";
-                        
+
             if (!Page.IsPostBack)
             {
                 ddRegional.DataTextField = "GLA_VAL";
@@ -44,7 +40,7 @@ namespace apoio_monsanto.glaapoio
                         txDc.Text = dsPesq.Tables[0].Rows[0][3].ToString();
                         //txSap.Text = dsPesq.Tables[0].Rows[0]["sap"].ToString();
 
-                        if(!string.IsNullOrEmpty(dsPesq.Tables[0].Rows[0]["unidade"].ToString()))
+                        if (!string.IsNullOrEmpty(dsPesq.Tables[0].Rows[0]["unidade"].ToString()))
                             ddUnidade.SelectedValue = dsPesq.Tables[0].Rows[0]["unidade"].ToString();
 
                         if (!string.IsNullOrEmpty(dsPesq.Tables[0].Rows[0]["regional"].ToString()))
@@ -75,7 +71,7 @@ namespace apoio_monsanto.glaapoio
                     catch (Exception)
                     {
 
-                    }                
+                    }
 
                     error.InnerText = "Registro removido!";
                     gvContracts.DataBind();
@@ -90,7 +86,7 @@ namespace apoio_monsanto.glaapoio
 
             Session["message"] = null;
 
-            
+
         }
 
         protected void btPes_Click(object sender, EventArgs e)
@@ -107,10 +103,10 @@ namespace apoio_monsanto.glaapoio
 
         protected string getActions()
         {
-            string create = "<a data-toggle='modal' data-placement='top' data-original-title='Novo Processo' href='contract?customer#modTipo' onclick='return clickTo(" + Eval("id") + ");' class='btn btn-success btn - xs fa fa-plus tooltips'></a>&nbsp;";
+            string create = "<a data-toggle='modal' data-placement='top' data-original-title='Novo Processo' onclick='return clickTo(" + Eval("id") + ");' class='btn btn-success btn - xs fa fa-plus tooltips'></a>&nbsp;";
             string view = "<a href='/glaapoio/contract?view=" + Eval("id").ToString() + "' class='btn btn-primary btn - xs fa fa-eye tooltips' data-placement='top' data-original-title='Ver Processos do Cliente'></a>";
 
-            if (Convert.ToInt64(Session["typelogin"]) > 2 )
+            if (Convert.ToInt64(Session["typelogin"]) > 2)
                 return view;
             else
                 return create + view;
@@ -121,7 +117,7 @@ namespace apoio_monsanto.glaapoio
             string view = "<a href='/glaapoio/process?id=" + Eval("id_client").ToString() + "&type=" + Eval("type_contract") + "&id_contract=" + Eval("id").ToString() + "' class='btn btn-primary btn - xs fa fa-eye tooltips' data-placement='top' data-original-title='Ver Contrato'></a>&nbsp;"; ;
             string delete = "<a href='/glaapoio/contract?view=" + Eval("id_client").ToString() + "&id_contract=" + Eval("id").ToString() + "&del=true' class='btn btn-danger btn - xs fa fa-trash-o tooltips tooltips confirmation' data-placement='top' data-original-title='Excluir Contrato'></a>&nbsp;";
 
-            if (Convert.ToInt64(Session["typelogin"]) >= 2 )
+            if (Convert.ToInt64(Session["typelogin"]) >= 2)
                 return view;
             else
                 return view + delete;
@@ -154,4 +150,3 @@ namespace apoio_monsanto.glaapoio
         }
     }
 }
- 

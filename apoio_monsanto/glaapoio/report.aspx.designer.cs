@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace apoio_monsanto.glaapoio {
-    
-    
-    public partial class report {
-        
+namespace apoio_monsanto.glaapoio
+{
+
+
+    public partial class report
+    {
+
         /// <summary>
         /// nome control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox nome;
-        
+
         /// <summary>
         /// documento control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox documento;
-        
+
         /// <summary>
         /// ddUnidade control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddUnidade;
-        
+
         /// <summary>
         /// ddRegional control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddRegional;
-        
+
         /// <summary>
         /// data_recebimento control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox data_recebimento;
-        
+
         /// <summary>
         /// data_contrato control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox data_contrato;
-        
+
         /// <summary>
         /// caixa control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox caixa;
-        
+
         /// <summary>
         /// ddStatus control.
         /// </summary>
@@ -83,7 +85,52 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddStatus;
-        
+
+        /// <summary>
+        /// ddlTipoAcordo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAcordo;
+
+        /// <summary>
+        /// txConfPor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txConfPor;
+
+        /// <summary>
+        /// recebimentoInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox recebimentoInicio;
+
+        /// <summary>
+        /// recebimentoFim control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox recebimentoFim;
+
+        /// <summary>
+        /// motivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList motivo;
+
         /// <summary>
         /// btPes control.
         /// </summary>
@@ -92,7 +139,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btPes;
-        
+
         /// <summary>
         /// btExcels control.
         /// </summary>
@@ -101,7 +148,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btExcels;
-        
+
         /// <summary>
         /// gvDetail control.
         /// </summary>
@@ -110,7 +157,7 @@ namespace apoio_monsanto.glaapoio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetail;
-        
+
         /// <summary>
         /// obDetail control.
         /// </summary>

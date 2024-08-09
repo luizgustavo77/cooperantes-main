@@ -24,6 +24,13 @@ namespace apoio_monsanto.glaapoio
                 ddUnidade.DataBind();
 
                 ddUnidade.SelectedValue = "";
+
+                motivo.DataTextField = "GLA_VAL";
+                motivo.DataValueField = "GLA_VAL";
+                motivo.DataSource = gla.selectAllMotivo(string.Empty);
+                motivo.DataBind();
+
+                motivo.SelectedValue = "";
             }
         }
         protected void btPes_Click(object sender, EventArgs e)

@@ -1802,7 +1802,8 @@ cus.sap Sap, cus.sap_filial SapFilial, dt_contract DataContrato, cy CY, cultura 
         }
 
         public DataSet reportNEWGLA(string name, string document, string unidade, string regional, string data_recebimento,
-            string data_contrato, string status, string caixa)
+            string data_contrato, string status, string caixa,
+            string ddlTipoAcordo, string txConfPor, string recebimentoInicio, string recebimentoFim, string motivo)
         {
             String query = "";
             DataSet dsRet = new DataSet();
@@ -1810,7 +1811,7 @@ cus.sap Sap, cus.sap_filial SapFilial, dt_contract DataContrato, cy CY, cultura 
 
             query = @" select cl.document CpfCnpj, cl.name Parceiro, cl.regional Regional, cl.unidade Unidade, 
                               c.dt_digital DataRecebimento, CASE WHEN c.dt_contract is null THEN 'Não Consta' WHEN c.dt_contract = '' THEN 'Não Consta' ELSE c.dt_contract END DataContrato, c.keeper NumeroCaixa, c.numero_acordo as NumeroAcordo, c.tipo_acordo as TipoAcordo, 
-                        case when c.status = 'A' then 'Aprovado' when c.status = 'R' then 'Reprovado' else '' end Status, c.obs Motivo
+                        case when c.status = 'A' then 'Aprovado' when c.status = 'R' then 'Reprovado' else '' end Status, c.obs Motivo, c.user_conf ConferidoPor
                         from NEW_CONTRACT c 
                         inner join NEW_CUSTOMER cl ON cl.id = c.id_client and cl.del is null
                         where c.id is not null";
@@ -1855,10 +1856,57 @@ cus.sap Sap, cus.sap_filial SapFilial, dt_contract DataContrato, cy CY, cultura 
                 query += " and c.keeper = '" + caixa + "'";
             }
 
+
+            if (!string.IsNullOrEmpty(ddlTipoAcordo))
+            {
+                query += " and c.tipo_acordo like '%" + ddlTipoAcordo + "%'";
+            }
+
+            if (!string.IsNullOrEmpty(txConfPor))
+            {
+                query += " and c.user_conf like '%" + txConfPor + "%'";
+            }
+
+            if (!string.IsNullOrEmpty(recebimentoInicio))
+            {
+                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(dt_digital AS DATETIME) IS NOT NULL and TRY_CAST(c.dt_digital as DATETIME) >= TRY_CAST('" + recebimentoInicio + "' as DATETIME)";
+            }
+
+            if (!string.IsNullOrEmpty(recebimentoFim))
+            {
+                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(dt_digital AS DATETIME) IS NOT NULL and TRY_CAST(c.dt_digital as DATETIME) <= TRY_CAST('" + recebimentoFim + "' as DATETIME)";
+            }
+
+            if (!string.IsNullOrEmpty(motivo))
+            {
+                query += " and c.obs like '%" + motivo + "%'";
+            }
+
+
             query += " ORDER BY cl.name, cl.document";
 
             string path = HttpContext.Current.Server.MapPath("data");
             memowrit(path + "/reportNEWGLA.txt", query);
+
+            dbAcess.execSql("select", query);
+
+            dsRet = dbAcess.dsReturn;
+            if (dsRet != null && dsRet.Tables.Count > 0)
+            {
+                return dsRet;
+            }
+
+            return null;
+        }
+
+        public DataSet selectAllMotivo(string type)
+        {
+            String query = "";
+            DataSet dsRet = new DataSet();
+            dbAcess.retQuery = "";
+
+            query = " SELECT '' GLA_VAL UNION ALL";
+            query += " SELECT motivo GLA_VAL FROM [base_monsanto].[dbo].[MOTIVO] ";
 
             dbAcess.execSql("select", query);
 

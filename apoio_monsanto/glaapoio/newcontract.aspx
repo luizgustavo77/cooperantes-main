@@ -35,8 +35,11 @@
                                             <p>
                                                 Iniciando
                                        
+                                               
+
                                                 <br />
                                                 Processo
+                                           
                                            
                                             </p>
                                         </div>
@@ -46,8 +49,11 @@
                                             <p>
                                                 Conferindo
                                        
+                                               
+
                                                 <br />
                                                 Contrato
+                                           
                                            
                                             </p>
                                         </div>
@@ -57,8 +63,11 @@
                                             <p>
                                                 Digitalizando
                                        
+                                               
+
                                                 <br />
                                                 Contrato
+                                           
                                            
                                             </p>
                                         </div>
@@ -68,8 +77,11 @@
                                             <p>
                                                 Arquivando
                                        
+                                               
+
                                                 <br />
                                                 Keepers
+                                           
                                            
                                             </p>
                                         </div>
@@ -79,8 +91,11 @@
                                             <p>
                                                 Processo
                                        
+                                               
+
                                                 <br />
                                                 Finalizado
+                                           
                                            
                                             </p>
                                         </div>
@@ -115,7 +130,10 @@
                                     <div class="col-sm-3">
                                         <i class="fa fa-calendar-o"></i>
                                         <label class="control-label">Data do Recebimento</label>
-                                        <asp:TextBox ID="data_recebimento" runat="server" class="datepicker form-control dtrec"></asp:TextBox>
+                                        <asp:TextBox ID="data_recebimento" runat="server" class="form-control dtrec" TextMode="Date" required="required"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvDtRec" runat="server" ControlToValidate="data_recebimento"
+                                            ErrorMessage="Data de recebimento é obrigatória" Display="Dynamic"
+                                            ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                     <!--<div class="col-sm-3">
                                         <i class="fa fa-calendar-o"></i>
@@ -125,6 +143,9 @@
                                     <div class="col-sm-3">
                                         <label class="control-label">Número de Caixa</label>
                                         <asp:TextBox ID="caixa" class="form-control keep" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvCaixa" runat="server" ControlToValidate="caixa"
+                                            ErrorMessage="Caixa é obrigatório quando o status é 'Aprovado'"
+                                            Display="Dynamic" ForeColor="Red" Enabled="false"></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="col-sm-3">
                                         <i class="fa fa-calendar-o"></i>
@@ -143,7 +164,7 @@
                                         <div class="col-sm-3">
                                             <div class="form-group col-sm-3">
                                                 <label class="control-label">Status</label>
-                                                <asp:DropDownList ID="ddStatus" runat="server" class="btn btn-default dropdown-toggle" data-toggle="dropdown" AutoPostBack="false">
+                                                <asp:DropDownList ID="ddStatus" runat="server" class="btn btn-default dropdown-toggle" data-toggle="dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddStatus_SelectedIndexChanged">
                                                     <asp:ListItem Value="">- Selecione -</asp:ListItem>
                                                     <asp:ListItem Value="A">Aprovado</asp:ListItem>
                                                     <asp:ListItem Value="R">Reprovado</asp:ListItem>
@@ -156,11 +177,13 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label class="control-label">Nº do Acordo:</label>
-                                            <asp:TextBox ID="txtAcordo" class="form-control confpor" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtAcordo" CssClass="form-control confpor" runat="server"
+                                                onkeypress="validateNumericInput(event)"
+                                                oninput="validateMaxLength(this)"></asp:TextBox>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group col-sm-3">
-                                                <label class="control-label" style="width:100px!important; max-width:unset!important;">Tipo Acordo</label>
+                                                <label class="control-label" style="width: 100px!important; max-width: unset!important;">Tipo Acordo</label>
                                                 <asp:DropDownList ID="ddlTipoAcordo" runat="server" class="btn btn-default dropdown-toggle" data-toggle="dropdown" AutoPostBack="false">
                                                     <asp:ListItem Value="">- Selecione -</asp:ListItem>
                                                     <asp:ListItem Value="IPRO BONUS R$18,50">IPRO BONUS R$18,50</asp:ListItem>
@@ -170,10 +193,32 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row col-lg-12">
-                                        <div class="col-sm-12">
-                                            <label class="control-label">Motivo</label>
-                                            <asp:TextBox ID="txObsCon" class="form-control obs" runat="server" TextMode="MultiLine" MaxLength="200"></asp:TextBox>
+                                    <div class="form-group">
+                                        <div class="col-sm-12 ">
+                                            <label class="control-label">Motivos de Reprovação:</label>
+                                            <div class="col-sm-12 centered">
+                                                <table border="0" class="centered">
+                                                    <tr>
+                                                        <td style="width: 50rem;">
+                                                            <asp:ListBox ID="lstLeft" runat="server" SelectionMode="Multiple" CssClass="form-control col-sm-12" DataSourceID="obMotivo" DataTextField="motivo" DataValueField="motivo"></asp:ListBox>
+                                                        </td>
+                                                        <td>
+                                                            <input type="button" class="btn btn-info" id="right" value="\/" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 50rem;">
+                                                            <asp:ListBox ID="lstRight" runat="server" SelectionMode="Multiple" CssClass="form-control col-sm-12 crit"></asp:ListBox>
+                                                        </td>
+                                                        <td>
+                                                            <input type="button" class="btn btn-info" id="left" value="/\" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +287,11 @@
                 </asp:ObjectDataSource>
 
                 <asp:ObjectDataSource ID="obSafra" runat="server" SelectMethod="selectAllSafra" TypeName="apoio_monsanto.commom"></asp:ObjectDataSource>
-
+                <asp:ObjectDataSource ID="obMotivo" runat="server" SelectMethod="selectAllMotivo" TypeName="apoio_monsanto.commom">
+                    <SelectParameters>
+                        <asp:SessionParameter DefaultValue="" Name="type" SessionField="typeGLA" Type="String" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </section>
         </section>
     </section>
@@ -373,6 +422,18 @@
             });
         }
 
+        function validateNumericInput(event) {
+            var char = String.fromCharCode(event.which);
+            if (!/[0-9]/.test(char)) {
+                event.preventDefault();
+            }
+        }
+
+        function validateMaxLength(input) {
+            if (input.value.length > 7) {
+                input.value = input.value.substring(0, 7);
+            }
+        }
     </script>
 
 

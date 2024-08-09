@@ -56,6 +56,38 @@
                                         </asp:DropDownList>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Tipo Acordo:</label>
+                                        <asp:DropDownList ID="ddlTipoAcordo" runat="server" class="btn btn-default dropdown-toggle gr col-sm-12" data-toggle="dropdown" AutoPostBack="false">
+                                            <asp:ListItem Value="">- Selecione -</asp:ListItem>
+                                            <asp:ListItem Value="IPRO BONUS R$18,50">IPRO BONUS R$18,50</asp:ListItem>
+                                            <asp:ListItem Value="IPRO SEM BONUS">IPRO SEM BONUS</asp:ListItem>
+                                            <asp:ListItem Value="I2X-XTEND">I2X-XTEND</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Conferido Por:</label>
+                                        <asp:TextBox ID="txConfPor" class="form-control confpor" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <i class="fa fa-calendar-o"></i>
+                                        <label class="control-label">Recebimento Inicio:</label>
+                                        <asp:TextBox ID="recebimentoInicio" runat="server" class="form-control dtrec" TextMode="Date"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <i class="fa fa-calendar-o"></i>
+                                        <label class="control-label">Recebimento Fim:</label>
+                                        <asp:TextBox ID="recebimentoFim" runat="server" class="form-control dtrec" TextMode="Date"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Motivo:</label>
+                                        <asp:DropDownList ID="motivo" runat="server" class="btn btn-default dropdown-toggle gr col-sm-12" data-toggle="dropdown" AutoPostBack="false">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
                                         <asp:Button ID="btPes" runat="server" Text="Pesquisar" OnClick="btPes_Click" class="btn btn-theme" />
@@ -85,11 +117,18 @@
                     <asp:ControlParameter ControlID="nome" Name="name" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="documento" Name="document" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="ddUnidade" Name="unidade" PropertyName="SelectedValue" Type="String" />
-                    <asp:ControlParameter ControlID="ddUnidade" Name="regional" PropertyName="SelectedValue" Type="String" />
+                    <asp:ControlParameter ControlID="ddRegional" Name="regional" PropertyName="SelectedValue" Type="String" />
                     <asp:ControlParameter ControlID="data_recebimento" Name="data_recebimento" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="data_contrato" Name="data_contrato" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="ddStatus" Name="status" PropertyName="SelectedValue" Type="String" />
                     <asp:ControlParameter ControlID="caixa" Name="caixa" PropertyName="Text" Type="String" />
+
+                    <asp:ControlParameter ControlID="ddlTipoAcordo" Name="ddlTipoAcordo" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="txConfPor" Name="txConfPor" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="recebimentoInicio" Name="recebimentoInicio" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="recebimentoFim" Name="recebimentoFim" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="motivo" Name="motivo" PropertyName="Text" Type="String" />
+
                 </SelectParameters>
             </asp:ObjectDataSource>
 

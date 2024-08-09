@@ -21,7 +21,8 @@ namespace apoio_monsanto
                 nameuser.InnerText = Session["namelogin"].ToString();
             }
 
-            string menu = @"    <li id='crit' runat='server'><a href='/criteria'>&nbsp;&nbsp;<span class='font11'>Critérios de Avaliação</span></a></li>
+            string menu = @"    <li id='crit' runat='server'><a href='/motivoreprova'>&nbsp;&nbsp;<span class='font11'>Motivos de Reprovação</span></a></li>
+                                <li id='crit' runat='server'><a href='/criteria'>&nbsp;&nbsp;<span class='font11'>Critérios de Avaliação</span></a></li>
                                 <li id='reg' runat='server'><a href='/region'>&nbsp;&nbsp;<span class='font11'>Regionais</span></a></li>
                                 <li id='dele' class='dele' runat='server'><a href='/delegation'>&nbsp;&nbsp;<span class='font11'>Delegação de Permissão</span></a></li>
                                 <li id='logs' runat='server'><a href='/logs'>&nbsp;&nbsp;<span class='font11'>Consulta de Logs</span></a></li>
@@ -69,6 +70,11 @@ namespace apoio_monsanto
             }
 
             if (HttpContext.Current.CurrentHandler.ToString().ToLower().Contains("criteria"))
+            {
+                ope.Attributes.Add("class", "active");
+            }
+
+            if (HttpContext.Current.CurrentHandler.ToString().ToLower().Contains("motivoreprova"))
             {
                 ope.Attributes.Add("class", "active");
             }

@@ -105,6 +105,11 @@ namespace apoio_monsanto
             "criteria",
             "~/criteria.aspx");
 
+            // motivoreprova
+            routes.MapPageRoute("motivoreprova",
+            "motivoreprova",
+            "~/motivoreprova.aspx");
+
             // apoio_flc
             routes.MapPageRoute("apoio_flc",
             "apoio_flc",

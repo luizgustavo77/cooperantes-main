@@ -1,1 +1,1 @@
- SELECT id, name, document, gr, rtv, agric FROM [base_monsanto].[dbo].[CUSTOMER] WHERE DEL is null  ORDER BY ID DESC 
+ SELECT id, name, document, gr, rtv, agric FROM [base_monsanto].[dbo].[CUSTOMER] WHERE DEL is null  AND id = 7952 ORDER BY ID DESC 

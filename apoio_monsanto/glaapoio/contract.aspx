@@ -5,6 +5,7 @@
     <script>
         function clickTo(id) {
             document.getElementById("<%=hidden.ClientID%>").value = id;
+            document.getElementById("<%=modTipoCria.ClientID%>").click();
             return true;
         }
     </script>
@@ -100,6 +101,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="dt_digital" HeaderText="Data Recebimento" />
+                                        <asp:BoundField DataField="tipo_acordo" HeaderText="Tipo Acordo" />
                                         <asp:TemplateField HeaderText="Status">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label1" runat="server" Text='<%# getStatus() %>'></asp:Label>
@@ -124,7 +126,7 @@
                             </div>
                         </div>
                     </div>
-                <!-- Modal -->
+                    <!-- Modal -->
                     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabdashboard="-1" id="modTipo" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -150,6 +152,7 @@
             </section>
             <! --/wrapper -->
             <asp:TextBox ID="hidden" runat="server" CssClass="hidden"></asp:TextBox>
+            <asp:Button class="hidden" OnClick="btNew_Cont_Click" runat="server" ID="modTipoCria" Text="Cria" />
         </section>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

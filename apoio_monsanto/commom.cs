@@ -13,11 +13,11 @@ using System.Net.Mail;
 
 namespace apoio_monsanto
 {
-	public class commom
-	{
+    public class commom
+    {
         dbAcess dbAcess = new dbAcess();
         String query = "";
-        public DataSet login (String login, String pass)
+        public DataSet login(String login, String pass)
         {
             DataSet dsRetorno = new DataSet();
 
@@ -33,7 +33,7 @@ namespace apoio_monsanto
             return dsRetorno;
         }
 
-        public String customer_add (int type, String name, String doc, String gr, String rtv, String agric)
+        public String customer_add(int type, String name, String doc, String gr, String rtv, String agric)
         {
             String ret = "";
             DataSet dsRet = new DataSet();
@@ -51,7 +51,7 @@ namespace apoio_monsanto
             }
 
             query = " INSERT INTO [base_monsanto].[dbo].[CUSTOMER] (name, document, type, gr, rtv) ";
-            query += " VALUES('"+name.ToUpper()+"', '"+doc+"', "+type+",'"+gr+"','"+rtv+"')";
+            query += " VALUES('" + name.ToUpper() + "', '" + doc + "', " + type + ",'" + gr + "','" + rtv + "')";
 
             dbAcess.execSql("insert", query);
 
@@ -97,7 +97,7 @@ namespace apoio_monsanto
 
             if (!String.IsNullOrEmpty(id))
             {
-                query += " AND id = "+id+ "";
+                query += " AND id = " + id + "";
             }
 
             query += " ORDER BY ID DESC ";
@@ -136,8 +136,8 @@ namespace apoio_monsanto
             if (dsRet != null && dsRet.Tables.Count > 0)
             {
 
-                query = " UPDATE [base_monsanto].[dbo].[CUSTOMER] SET name = '" + name.ToUpper() +"', document = '"+document+"', del = "+delete+", gr = '" + gr + "', rtv = '" + rtv + "' ";
-                query += " WHERE ID = "+id+" ";
+                query = " UPDATE [base_monsanto].[dbo].[CUSTOMER] SET name = '" + name.ToUpper() + "', document = '" + document + "', del = " + delete + ", gr = '" + gr + "', rtv = '" + rtv + "' ";
+                query += " WHERE ID = " + id + " ";
 
                 dbAcess.execSql("update", query);
 
@@ -147,7 +147,7 @@ namespace apoio_monsanto
             return ret;
         }
 
-        public string insertContract (string type, string id_client, ref string id_contract, string useradd)
+        public string insertContract(string type, string id_client, ref string id_contract, string useradd)
         {
             string ret = "";
             string query = "";
@@ -158,7 +158,7 @@ namespace apoio_monsanto
 
             id_contract = dbAcess.dsReturn.Tables[0].Rows[0][0].ToString();
 
-            query = " INSERT INTO [base_monsanto].[dbo].[CONTRACT] (type_contract, id_client, id, useradd, lastupduser) " ;
+            query = " INSERT INTO [base_monsanto].[dbo].[CONTRACT] (type_contract, id_client, id, useradd, lastupduser) ";
             query += " VALUES ('{0}','{1}', '{2}', '{3}', '{3}')";
 
             query = String.Format(query, type, id_client, id_contract, useradd);
@@ -170,9 +170,9 @@ namespace apoio_monsanto
             return ret;
         }
 
-        public string updateContract(string id, string dt_receb,string safra, string obs, string status, string dt_status, string user_conf,
-            string criteria, string id_user_rtv, string id_user_gr, string dt_digital, string dt_archive, string dt_approv, string keeper, 
-            string userupd, string tpDoc, string tpTermo, string dtContrato, string vigencia, string rsVolTotal, string rsVolTestadaMais, 
+        public string updateContract(string id, string dt_receb, string safra, string obs, string status, string dt_status, string user_conf,
+            string criteria, string id_user_rtv, string id_user_gr, string dt_digital, string dt_archive, string dt_approv, string keeper,
+            string userupd, string tpDoc, string tpTermo, string dtContrato, string vigencia, string rsVolTotal, string rsVolTestadaMais,
             string rsVolTestadaMenos, string baixaCredito, string fixacao, string rsValorFixado, string rsVolOutrosPartic, string valorTaxas,
             string bonusSemestral, string reajuste, string rsValorAdiantamento, string area_produtor_hectare, string valor_hectare)
         {
@@ -190,7 +190,7 @@ namespace apoio_monsanto
                                 rs_vol_testada_menos = '{20}', baixa_credito = '{21}', fixacao = '{22}', rs_valor_fixado = '{23}', rs_vol_outros_partic = '{24}',
                                 valor_taxas = '{25}', bonus_semestral = '{26}', reajuste = '{27}', rs_valor_adiantamento = '{28}',
                                 area_produtor_hectare = '{29}', valor_hectare = '{30}'";
-            query += " WHERE id = "+id+"";
+            query += " WHERE id = " + id + "";
 
             query = String.Format(query, dt_receb, safra, obs, status, dt_status, user_conf, criteria, id_user_rtv, id_user_gr,
                 dt_digital, dt_archive, dt_approv, keeper, userupd, tpDoc, tpTermo, dtContrato, vigencia, rsVolTotal, rsVolTestadaMais, rsVolTestadaMenos,
@@ -205,7 +205,7 @@ namespace apoio_monsanto
 
             return ret;
         }
-        public DataSet selectContract (String id)
+        public DataSet selectContract(String id)
         {
             DataSet dsRet = new DataSet();
             dbAcess.dsReturn.Clear();
@@ -281,7 +281,7 @@ namespace apoio_monsanto
             return null;
         }
 
-        public String insertDocument (String id_contract, String id_client, String docname, String path)
+        public String insertDocument(String id_contract, String id_client, String docname, String path)
         {
             String query = "";
             String ret = "";
@@ -303,7 +303,7 @@ namespace apoio_monsanto
             DataSet dsRet = new DataSet();
             dbAcess.dsReturn.Clear();
 
-            query = " SELECT * FROM [base_monsanto].[dbo].[DOCUMENT] WHERE id_contract = '"+ id_contract + "' ";
+            query = " SELECT * FROM [base_monsanto].[dbo].[DOCUMENT] WHERE id_contract = '" + id_contract + "' ";
 
             dbAcess.execSql("select", query);
 
@@ -437,7 +437,7 @@ namespace apoio_monsanto
             String query = "";
             DataSet dsRet = new DataSet();
 
-            query = " SELECT id_doc FROM [base_monsanto].[dbo].[CONTRACT] WHERE id = "+id_contract+" ";
+            query = " SELECT id_doc FROM [base_monsanto].[dbo].[CONTRACT] WHERE id = " + id_contract + " ";
 
             dbAcess.execSql("select", query);
 
@@ -446,7 +446,7 @@ namespace apoio_monsanto
             {
                 if (String.IsNullOrEmpty(dsRet.Tables[0].Rows[0][0].ToString()))
                 {
-                    query = " UPDATE [base_monsanto].[dbo].[CONTRACT] SET id_doc = '"+docname+"' WHERE id = "+id_contract+"";
+                    query = " UPDATE [base_monsanto].[dbo].[CONTRACT] SET id_doc = '" + docname + "' WHERE id = " + id_contract + "";
 
                     dbAcess.execSql("update", query);
                 }
@@ -460,7 +460,7 @@ namespace apoio_monsanto
             try
             {
                 query = " UPDATE [base_monsanto].[dbo].[REGISTER] set pass = '" + dbAcess.Encrypt(conPass) + "', changepass = 'S' ";
-                query += " WHERE login = '"+username+"' ";
+                query += " WHERE login = '" + username + "' ";
 
                 dbAcess.execSql("update", query);
 
@@ -473,7 +473,7 @@ namespace apoio_monsanto
             }
         }
 
-        public String insertUser(string name, string email, string login, string type, string active, 
+        public String insertUser(string name, string email, string login, string type, string active,
             string distrito, string regional, string cont1, string cont2, string endereco, string usergla)
         {
             String ret = "";
@@ -492,7 +492,7 @@ namespace apoio_monsanto
             }
 
             query = " INSERT INTO [base_monsanto].[dbo].[REGISTER] (name, email, login, type, active, distrito, regional, contato1, contato2, endereco, usergla) ";
-            query += " VALUES('" + name.ToUpper() + "', '" + email + "', '" + login + "', '"+type+"', '"+active+"', '"+distrito+"','"+regional+"','"+cont1+"','"+cont2+"','"+endereco+"','"+ usergla+"')";
+            query += " VALUES('" + name.ToUpper() + "', '" + email + "', '" + login + "', '" + type + "', '" + active + "', '" + distrito + "','" + regional + "','" + cont1 + "','" + cont2 + "','" + endereco + "','" + usergla + "')";
 
             dbAcess.execSql("insert", query);
 
@@ -786,7 +786,7 @@ namespace apoio_monsanto
             return returnMessage;
         }
 
-        public string retUserMail (String name)
+        public string retUserMail(String name)
         {
             String query = "";
             DataSet dsRet = new DataSet();
@@ -857,7 +857,7 @@ namespace apoio_monsanto
                         ON D.ID = REPLACE(REPLACE(A.PK, '<ID=', ''), '>', '')
                         INNER JOIN [base_monsanto].[dbo].[CUSTOMER] C
                         ON C.ID = D.ID_CLIENT";
-            
+
             if (!String.IsNullOrEmpty(reference))
             {
                 query += @" AND D.ID_DOC LIKE UPPER('%{0}%') ";
@@ -874,7 +874,7 @@ namespace apoio_monsanto
 
             if (!String.IsNullOrEmpty(user))
             {
-                query += " AND USERNAME LIKE '%"+user+"%'";
+                query += " AND USERNAME LIKE '%" + user + "%'";
             }
 
             query += " ORDER BY UPDATEDATE DESC";
@@ -939,7 +939,7 @@ namespace apoio_monsanto
             if (operation == "VALIDATE")
             {
                 query = " SELECT ISNULL(MAX(CASE WHEN CONVERT(DATETIME,DT_PERM_INI,105) < CONVERT(DATETIME,GETDATE(),105) THEN 'ALLOWED' ELSE 'FORBIDDEN' END),'') ";
-                query += " FROM [base_monsanto].[dbo].[PERMISSION] WHERE id_user = '"+id_user+"' ";
+                query += " FROM [base_monsanto].[dbo].[PERMISSION] WHERE id_user = '" + id_user + "' ";
 
                 dbAcess.stringSql(query);
 
@@ -953,7 +953,7 @@ namespace apoio_monsanto
             if (operation == "INSERT")
                 type = 1;
 
-            query = " UPDATE [base_monsanto].[dbo].[REGISTER] set TYPE = "+type+" where login = '" + id_user + "' ";
+            query = " UPDATE [base_monsanto].[dbo].[REGISTER] set TYPE = " + type + " where login = '" + id_user + "' ";
 
             dbAcess.execSql("update", query);
 
@@ -1004,7 +1004,7 @@ namespace apoio_monsanto
 
         public String retPassDecrypt(string login)
         {
-            query = " SELECT PASS FROM [base_monsanto].[dbo].[REGISTER] WHERE del is null AND login = '"+login+"' ";
+            query = " SELECT PASS FROM [base_monsanto].[dbo].[REGISTER] WHERE del is null AND login = '" + login + "' ";
 
             dbAcess.stringSql(query);
 
@@ -1067,7 +1067,7 @@ namespace apoio_monsanto
             query = " SELECT * FROM [base_monsanto].[dbo].[CRITERIA] ";
             if (!String.IsNullOrEmpty(type))
             {
-                query += " WHERE type = '"+type+"' ";
+                query += " WHERE type = '" + type + "' ";
             }
             query += "    ORDER BY 1 ASC";
 
@@ -1082,13 +1082,67 @@ namespace apoio_monsanto
             return null;
         }
 
+        public DataSet selectAllMotivo(string type)
+        {
+            String query = "";
+            DataSet dsRet = new DataSet();
+            dbAcess.retQuery = "";
+
+            query = " SELECT * FROM [base_monsanto].[dbo].[MOTIVO] ";
+            if (!String.IsNullOrEmpty(type))
+            {
+                query += " WHERE type = '" + type + "' ";
+            }
+            query += "    ORDER BY 1 ASC";
+
+            dbAcess.execSql("select", query);
+
+            dsRet = dbAcess.dsReturn;
+            if (dsRet != null && dsRet.Tables.Count > 0)
+            {
+                return dsRet;
+            }
+
+            return null;
+        }
+
+        public string deleteMotivo(string id_motivo)
+        {
+            String query = "";
+            string ret = "";
+            dbAcess.retQuery = "";
+
+            query = "DELETE FROM [base_monsanto].[dbo].[MOTIVO] WHERE id = " + id_motivo + " ";
+
+            dbAcess.execSql("delete", query);
+
+            ret = dbAcess.retQuery;
+
+            return ret;
+        }
+
+        public string insertMotivoReprova(string motivo, string type)
+        {
+            String query = "";
+            string ret = "";
+            dbAcess.retQuery = "";
+
+            query = "INSERT INTO [base_monsanto].[dbo].[MOTIVO] (motivo, type) VALUES ('" + motivo + "','" + type + "') ";
+
+            dbAcess.execSql("insert", query);
+
+            ret = dbAcess.retQuery;
+
+            return ret;
+        }
+
         public string insertCriteria(string criteria, string type)
         {
             String query = "";
             string ret = "";
             dbAcess.retQuery = "";
 
-            query = "INSERT INTO [base_monsanto].[dbo].[CRITERIA] (criteria, type) VALUES ('"+criteria+"','"+type+"') ";
+            query = "INSERT INTO [base_monsanto].[dbo].[CRITERIA] (criteria, type) VALUES ('" + criteria + "','" + type + "') ";
 
             dbAcess.execSql("insert", query);
 
@@ -1170,7 +1224,7 @@ namespace apoio_monsanto
                 ret = dbAcess.retQuery;
             }
 
-            
+
 
             return ret;
         }
@@ -1299,7 +1353,7 @@ namespace apoio_monsanto
             query += "  AND status = 2 ";
             query += "  AND safra = '" + safra + "' ";
 
-           if (!String.IsNullOrEmpty(gr) && gr != "Todos")
+            if (!String.IsNullOrEmpty(gr) && gr != "Todos")
                 query += " AND id_user_gr = '" + gr + "'";
 
             if (!String.IsNullOrEmpty(rtv) && rtv != "Todos")
@@ -1455,7 +1509,7 @@ c.dt_contrato as 'Data Contrato',
             if (!String.IsNullOrEmpty(tpDoc) && tpCont == "3")
                 query += " AND type_doc_prdsem = '" + tpDoc + "' ";
 
-            if ( ! String.IsNullOrEmpty(tpTermo))
+            if (!String.IsNullOrEmpty(tpTermo))
                 query += " AND term = '" + tpTermo + "' ";
 
             query += "  ORDER BY 1";
@@ -1474,7 +1528,7 @@ c.dt_contrato as 'Data Contrato',
             return null;
         }
 
-        public DataSet retDistByRTV (String rtv)
+        public DataSet retDistByRTV(String rtv)
         {
             String query = "";
             DataSet dsRet = new DataSet();
@@ -1482,7 +1536,7 @@ c.dt_contrato as 'Data Contrato',
 
             rtv = String.IsNullOrEmpty(rtv) ? rtv : rtv.ToUpper();
 
-            query = " SELECT distinct distrito FROM [base_monsanto].[dbo].[REGISTER] WHERE name = '"+rtv+"' and type = 3 and (del = '' or del is null) ";
+            query = " SELECT distinct distrito FROM [base_monsanto].[dbo].[REGISTER] WHERE name = '" + rtv + "' and type = 3 and (del = '' or del is null) ";
 
             dbAcess.execSql("select", query);
 
@@ -1516,12 +1570,12 @@ c.dt_contrato as 'Data Contrato',
             return null;
         }
 
-        public Boolean valueValidation (String value, int type)
+        public Boolean valueValidation(String value, int type)
         {
             bool ret = false;
             string query = "";
 
-            query = " SELECT COUNT(*) FROM [base_monsanto].[dbo].[REGISTER] WHERE name = '" + value + "' and type = "+type+" AND (DEL IS NULL OR DEL = '') ";
+            query = " SELECT COUNT(*) FROM [base_monsanto].[dbo].[REGISTER] WHERE name = '" + value + "' and type = " + type + " AND (DEL IS NULL OR DEL = '') ";
 
             dbAcess.stringSql(query);
 

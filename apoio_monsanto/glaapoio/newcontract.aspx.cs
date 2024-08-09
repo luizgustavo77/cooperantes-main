@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Collections;
-using System.Web.SessionState;
-using System.Web.UI.HtmlControls;
-using System.IO;
 
 namespace apoio_monsanto.glaapoio
 {
@@ -17,8 +14,14 @@ namespace apoio_monsanto.glaapoio
         newmom com = new newmom();
         protected System.Web.UI.HtmlControls.HtmlInputFile File;
         protected System.Web.UI.HtmlControls.HtmlInputButton Submit;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["login"] != null)
+            {
+                txConfPor.Text = Session["login"]?.ToString();
+            }
+
             if (Request.QueryString["type"] != null)
             {
                 /*if (Request.QueryString["type"].ToString() == "3")
@@ -94,9 +97,25 @@ namespace apoio_monsanto.glaapoio
 
                             ddStatus.SelectedValue = string.IsNullOrEmpty(dsCont.Tables[0].Rows[0]["status"].ToString()) ? "" : dsCont.Tables[0].Rows[0]["status"].ToString();
 
-                            txConfPor.Text = dsCont.Tables[0].Rows[0]["user_conf"].ToString();
+                            if (!string.IsNullOrWhiteSpace(dsCont.Tables[0].Rows[0]["user_conf"].ToString()))
+                            {
+                                txConfPor.Text = dsCont.Tables[0].Rows[0]["user_conf"].ToString();
+                            }
 
-                            txObsCon.Text = dsCont.Tables[0].Rows[0]["obs"].ToString();
+                            string lstR = dsCont.Tables[0].Rows[0]["obs"].ToString();
+                            string[] words = lstR.Split(',');
+                            lstRight.Items.Clear();
+                            foreach (string word in words)
+                            {
+                                lstRight.Items.Add(word);
+                                lstLeft.Items.Remove(word);
+                            }
+
+                            if (readOnly)
+                            {
+                                lstRight.Attributes["class"] += " aspNetDisabled";
+                                lstLeft.Attributes["class"] += " aspNetDisabled";
+                            }
 
                             try
                             {
@@ -129,31 +148,61 @@ namespace apoio_monsanto.glaapoio
             }
         }
 
+        protected void ddStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddStatus.SelectedValue == "A")
+            {
+                rfvCaixa.Enabled = true;
+                caixa.Enabled = true;
+                caixa.BackColor = Color.White;
+
+                lstLeft.Enabled = false;
+                lstLeft.BackColor = Color.LightGray;
+                lstRight.Enabled = false;
+                lstRight.BackColor = Color.LightGray;
+            }
+            else
+            {
+                rfvCaixa.Enabled = false;
+                caixa.Enabled = false;
+                caixa.BackColor = Color.LightGray;
+                caixa.Text = string.Empty;
+
+                lstLeft.Enabled = true;
+                lstLeft.BackColor = Color.White;
+                lstRight.Enabled = true;
+                lstRight.BackColor = Color.White;
+            }
+        }
+
         protected void btGrava_Click(object sender, EventArgs e)
         {
             try
             {
-                DataSet dsVal = new DataSet();
-                String id_contract = Request.QueryString["id_contract"].ToString();
-                bool cont = true;
-                /*dsVal = com.selectDocument(id_contract);
-                if ((dsVal == null || dsVal.Tables.Count == 0))
+                if (Page.IsValid)
                 {
-                    error.Visible = true;
-                    error.InnerText = "É necessário fazer o upload dos documentos antes de salvar o processo!";
-                    cont = false;
-                    divUp.Attributes["class"] += " focusedInput";
-                    divUp.Focus();
-                }*/
 
-                if (cont)
-                {
-                    //dt_receb = '{0}', safra = '{1}', obs = '{2}', status = '{3}', dt_status = '{4}', user_conf = '{5}', criteria = '{6}', id_user_rtv = '{7}', id_user_gr = '{8}', dt_digital = '{9}', dt_archive = '{10}', dt_approv = '{11}', keeper = '{12}'";
-                    DataSet dsConsAnt = new DataSet();
-                    DataSet dsConsDep = new DataSet();
+                    DataSet dsVal = new DataSet();
+                    String id_contract = Request.QueryString["id_contract"].ToString();
+                    bool cont = true;
+                    /*dsVal = com.selectDocument(id_contract);
+                    if ((dsVal == null || dsVal.Tables.Count == 0))
+                    {
+                        error.Visible = true;
+                        error.InnerText = "É necessário fazer o upload dos documentos antes de salvar o processo!";
+                        cont = false;
+                        divUp.Attributes["class"] += " focusedInput";
+                        divUp.Focus();
+                    }*/
 
-                    error.Visible = true;
-                    error.InnerText = "";/*com.updateContract(id_contract, txDtRec.Text,
+                    if (cont)
+                    {
+                        //dt_receb = '{0}', safra = '{1}', obs = '{2}', status = '{3}', dt_status = '{4}', user_conf = '{5}', criteria = '{6}', id_user_rtv = '{7}', id_user_gr = '{8}', dt_digital = '{9}', dt_archive = '{10}', dt_approv = '{11}', keeper = '{12}'";
+                        DataSet dsConsAnt = new DataSet();
+                        DataSet dsConsDep = new DataSet();
+
+                        error.Visible = true;
+                        error.InnerText = "";/*com.updateContract(id_contract, txDtRec.Text,
                        txSafra, txObsCon.Text,
                        "",
                        "", txConfPor.Text, rightSelectedItems,
@@ -161,58 +210,69 @@ namespace apoio_monsanto.glaapoio
                        txDtDigit.Text, "", "",
                        txCKeepers.Text, Session["login"].ToString(), tpProd, rbTpTermo.SelectedValue);*/
 
-                    List<String> tableFields = new List<string>();
-                    List<String> tableValues = new List<string>();
+                        List<String> tableFields = new List<string>();
+                        List<String> tableValues = new List<string>();
 
-                    tableFields.Add("type_contract");
-                    tableValues.Add(Request.QueryString["type"].ToString());
+                        tableFields.Add("type_contract");
+                        tableValues.Add(Request.QueryString["type"].ToString());
 
-                    tableFields.Add("obs");
-                    tableValues.Add(txObsCon.Text);
 
-                    tableFields.Add("user_conf");
-                    tableValues.Add(txConfPor.Text);
+                        string rightSelectedItems = Request.Form[lstRight.UniqueID];
+                        lstRight.Items.Clear();
+                        if (!string.IsNullOrEmpty(rightSelectedItems))
+                        {
+                            foreach (string item in rightSelectedItems.Split(','))
+                            {
+                                lstRight.Items.Add(item);
+                            }
+                        }
 
-                    if (!string.IsNullOrEmpty(data_recebimento.Text))
-                    {
-                        tableFields.Add("dt_digital");
-                        tableValues.Add(data_recebimento.Text);
+                        tableFields.Add("obs");
+                        tableValues.Add(rightSelectedItems);
+
+                        tableFields.Add("user_conf");
+                        tableValues.Add(txConfPor.Text);
+
+                        if (!string.IsNullOrEmpty(data_recebimento.Text))
+                        {
+                            tableFields.Add("dt_digital");
+                            tableValues.Add(data_recebimento.Text);
+                        }
+
+                        if (!string.IsNullOrEmpty(data_contrato.Text))
+                        {
+                            tableFields.Add("dt_contract");
+                            tableValues.Add(data_contrato.Text);
+                        }
+
+                        /*if (!string.IsNullOrEmpty(data_arquivamento.Text))
+                        {
+                            tableFields.Add("dt_archive");
+                            tableValues.Add(data_arquivamento.Text);
+                        }*/
+
+                        tableFields.Add("keeper");
+                        tableValues.Add(caixa.Text);
+
+                        tableFields.Add("status");
+                        tableValues.Add(ddStatus.SelectedValue);
+
+
+
+                        tableFields.Add("numero_acordo");
+                        tableValues.Add(txtAcordo.Text);
+
+                        tableFields.Add("tipo_acordo");
+                        tableValues.Add(ddlTipoAcordo.SelectedValue);
+
+                        com.Main_CUD("update", "NEW_CONTRACT", tableFields, tableValues, "id", id_contract, false);
+
+                        error.Visible = false;
+
+                        //string path = Server.MapPath("data");
+                        //com.memowrit(path + "/arquivo_log.txt", error.InnerText);
                     }
-
-                    if (!string.IsNullOrEmpty(data_contrato.Text))
-                    {
-                        tableFields.Add("dt_contract");
-                        tableValues.Add(data_contrato.Text);
-                    }
-
-                    /*if (!string.IsNullOrEmpty(data_arquivamento.Text))
-                    {
-                        tableFields.Add("dt_archive");
-                        tableValues.Add(data_arquivamento.Text);
-                    }*/
-
-                    tableFields.Add("keeper");
-                    tableValues.Add(caixa.Text);
-
-                    tableFields.Add("status");
-                    tableValues.Add(ddStatus.SelectedValue);
-
-
-
-                    tableFields.Add("numero_acordo");
-                    tableValues.Add(txtAcordo.Text);
-
-                    tableFields.Add("tipo_acordo");
-                    tableValues.Add(ddlTipoAcordo.SelectedValue);
-
-                    com.Main_CUD("update", "NEW_CONTRACT", tableFields, tableValues, "id", id_contract, false);
-
-                    error.Visible = false;
-
-                    //string path = Server.MapPath("data");
-                    //com.memowrit(path + "/arquivo_log.txt", error.InnerText);
                 }
-
             }
             catch (Exception ex)
             {
@@ -239,6 +299,10 @@ namespace apoio_monsanto.glaapoio
             this.btUp.ServerClick += new System.EventHandler(this.btUp_ServerClick);
             this.Load += new System.EventHandler(this.Page_Load);
 
+            if (Session["login"] != null)
+            {
+                txConfPor.Text = Session["login"]?.ToString();
+            }
         }
 
         private void btUp_ServerClick(object sender, System.EventArgs e)

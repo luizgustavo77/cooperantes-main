@@ -90,6 +90,8 @@
     <Content Include="cooperantes\newcontract.aspx" />
     <Content Include="cooperantes\register.aspx" />
     <Content Include="cooperantes\report.aspx" />
+    <Content Include="Models\motivo.sql" />
+    <Content Include="motivoreprova.aspx" />
     <Content Include="glaapoio\contract.aspx" />
     <Content Include="glaapoio\form_general.aspx" />
     <Content Include="glaapoio\newcontract.aspx" />
@@ -146,6 +148,13 @@
     </Compile>
     <Compile Include="cooperantes\type_process.aspx.designer.cs">
       <DependentUpon>type_process.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="motivoreprova.aspx.cs">
+      <DependentUpon>motivoreprova.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="motivoreprova.aspx.designer.cs">
+      <DependentUpon>motivoreprova.aspx</DependentUpon>
     </Compile>
     <Compile Include="newgla.Master.cs">
       <DependentUpon>newgla.Master</DependentUpon>
@@ -404,7 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
