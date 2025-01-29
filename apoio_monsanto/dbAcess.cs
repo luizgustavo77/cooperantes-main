@@ -13,7 +13,12 @@ namespace apoio_monsanto
         //string connStr = ConfigurationManager.ConnectionStrings["MyDbConn1"].ToString();
         //SqlConnection myConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog = base_monsanto; Integrated Security = False; User Id = apoio_mon; Password=&$$mon_$@nt0;");
 
+#if DEBUG
+        SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDbConn2"].ToString());
+#else
         SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDbConn1"].ToString());
+#endif
+
         private DataSet dsRetQry = new DataSet();
         public DataSet dsReturn
         {

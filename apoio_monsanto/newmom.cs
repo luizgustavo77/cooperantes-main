@@ -1869,12 +1869,12 @@ cus.sap Sap, cus.sap_filial SapFilial, dt_contract DataContrato, cy CY, cultura 
 
             if (!string.IsNullOrEmpty(recebimentoInicio))
             {
-                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(dt_digital AS DATETIME) IS NOT NULL and TRY_CAST(c.dt_digital as DATETIME) >= TRY_CAST('" + recebimentoInicio + "' as DATETIME)";
+                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(c.dt_digital AS DATE) IS NOT NULL and TRY_CAST(c.dt_digital as DATE) >= TRY_CAST('" + recebimentoInicio + "' as DATE)";
             }
 
             if (!string.IsNullOrEmpty(recebimentoFim))
             {
-                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(dt_digital AS DATETIME) IS NOT NULL and TRY_CAST(c.dt_digital as DATETIME) <= TRY_CAST('" + recebimentoFim + "' as DATETIME)";
+                query += " and c.dt_digital is not null and c.dt_digital <> '' and TRY_CAST(c.dt_digital AS DATE) IS NOT NULL and TRY_CAST(c.dt_digital as DATE) <= TRY_CAST('" + recebimentoFim + "' as DATE)";
             }
 
             if (!string.IsNullOrEmpty(motivo))

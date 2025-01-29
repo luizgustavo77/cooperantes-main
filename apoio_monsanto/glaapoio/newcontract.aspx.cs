@@ -17,9 +17,9 @@ namespace apoio_monsanto.glaapoio
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null)
+            if (Session["namelogin"] != null)
             {
-                txConfPor.Text = Session["login"]?.ToString();
+                txConfPor.Text = Session["namelogin"]?.ToString();
             }
 
             if (Request.QueryString["type"] != null)
@@ -160,6 +160,8 @@ namespace apoio_monsanto.glaapoio
                 lstLeft.BackColor = Color.LightGray;
                 lstRight.Enabled = false;
                 lstRight.BackColor = Color.LightGray;
+
+                rfvTipoAcordo.Enabled = true;
             }
             else
             {
@@ -172,6 +174,8 @@ namespace apoio_monsanto.glaapoio
                 lstLeft.BackColor = Color.White;
                 lstRight.Enabled = true;
                 lstRight.BackColor = Color.White;
+
+                rfvTipoAcordo.Enabled = false;
             }
         }
 
@@ -299,9 +303,9 @@ namespace apoio_monsanto.glaapoio
             this.btUp.ServerClick += new System.EventHandler(this.btUp_ServerClick);
             this.Load += new System.EventHandler(this.Page_Load);
 
-            if (Session["login"] != null)
+            if (Session["namelogin"] != null)
             {
-                txConfPor.Text = Session["login"]?.ToString();
+                txConfPor.Text = Session["namelogin"]?.ToString();
             }
         }
 

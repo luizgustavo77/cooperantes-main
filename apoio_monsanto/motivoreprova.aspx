@@ -23,7 +23,7 @@
                                     <label class="control-label">Motivos de Reprovação</label>
                                     <asp:TextBox ID="txCrite" runat="server" class="form-control" placeholder="Motivos de Reprovação"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-lg-3" style="display: NONE;">
                                     <label class="control-label">Exclusivo GLA</label>
                                     <asp:CheckBox ID="userGLA" runat="server" Text="" TextAlign="Left" Checked="False" class="switch-left switch-animate" />
                                 </div>

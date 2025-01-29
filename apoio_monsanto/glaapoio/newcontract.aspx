@@ -190,6 +190,9 @@
                                                     <asp:ListItem Value="IPRO SEM BONUS">IPRO SEM BONUS</asp:ListItem>
                                                     <asp:ListItem Value="I2X-XTEND">I2X-XTEND</asp:ListItem>
                                                 </asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="rfvTipoAcordo" runat="server" ControlToValidate="ddlTipoAcordo"
+                                                    ErrorMessage="Obrigatório"
+                                                    Display="Dynamic" ForeColor="Red" Enabled="false"></asp:RequiredFieldValidator>
                                             </div>
                                         </div>
                                     </div>
