@@ -90,6 +90,7 @@
     <Content Include="cooperantes\newcontract.aspx" />
     <Content Include="cooperantes\register.aspx" />
     <Content Include="cooperantes\report.aspx" />
+    <Content Include="database\resetPassword.sql" />
     <Content Include="Models\motivo.sql" />
     <Content Include="motivoreprova.aspx" />
     <Content Include="glaapoio\contract.aspx" />

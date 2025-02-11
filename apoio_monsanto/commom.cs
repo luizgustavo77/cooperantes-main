@@ -737,8 +737,8 @@ namespace apoio_monsanto
         {
             // that information belong to the properties file
             // if you change that shit, some shit will happen
-            string mailAuth = "flcservicos2017@gmail.com";
-            string mailAuthPass = "foqazlkdiaprdpyv";
+            string mailAuth = "noreply@byfy.com.br";
+            string mailAuthPass = "Y#c14a5ewa0HUFl$zbx";
 
             // any message will be reported as return data
             string returnMessage = "";
@@ -749,7 +749,7 @@ namespace apoio_monsanto
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                 mail.IsBodyHtml = true;
-                mail.From = new MailAddress(mailAuth, "Apoio FLC");
+                mail.From = new MailAddress("admin@apoioflc.com.br", "Apoio FLC");
                 mail.To.Add(mailTo);
 
                 mail.Subject = mailSubject;
